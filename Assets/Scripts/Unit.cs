@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
+    [SerializeField] private Animator unitAnimator;
+
     private Vector3 targetPosition;
+
+    private void Awake()
+    {
+        targetPosition = transform.position;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -21,15 +28,19 @@ public class Unit : MonoBehaviour
             Vector3 moveDirection = (targetPosition - transform.position).normalized;
             float moveSpeed = 4f;
             transform.position += moveDirection * moveSpeed * Time.deltaTime;
-        }
 
-        if(Input.GetMouseButtonDown(0))
+            float rotateSpeed = 10f;
+            transform.forward = Vector3.Lerp(transform.forward, moveDirection, Time.deltaTime * rotateSpeed);
+
+            unitAnimator.SetBool("IsWalking", true);
+        }
+        else
         {
-            Move(MouseWorld.GetPosition());
+            unitAnimator.SetBool("IsWalking", false);
         }
     }
 
-    private void Move(Vector3 targetPostion)
+    public void Move(Vector3 targetPostion)
     {
         this.targetPosition = targetPostion;
     }
