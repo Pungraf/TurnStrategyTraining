@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ public class UnitActioSystemUI : MonoBehaviour
 {
     [SerializeField] private Transform actionButtonPrefab;
     [SerializeField] private Transform actionButtonContainerTransfrom;
+    [SerializeField] private TextMeshProUGUI actionPointsText;
 
     private List<ActionButtonUI> actionButtonUIList = new List<ActionButtonUI>();
 
@@ -22,6 +24,7 @@ public class UnitActioSystemUI : MonoBehaviour
     {
         UnitActionSystem.Instance.OnSelectedUnitChange += UnitActionSystem_OnSelectedUnitChanged;
         UnitActionSystem.Instance.OnSelectedActionChange += UnitActionSystem_OnSelectedActiontChanged;
+        UnitActionSystem.Instance.OnActionStarted += UnitActionSystem_OnActionStarted;
 
         CreateUnitActionButtons();
         UpdateSelectedVisual();
@@ -58,11 +61,17 @@ public class UnitActioSystemUI : MonoBehaviour
     {
         CreateUnitActionButtons();
         UpdateSelectedVisual();
+        UpdateActionPoints();
     }
 
     private void UnitActionSystem_OnSelectedActiontChanged(object sender, EventArgs e)
     {
         UpdateSelectedVisual();
+    }
+
+    private void UnitActionSystem_OnActionStarted(object sender, EventArgs e)
+    {
+        UpdateActionPoints();
     }
 
     private void UpdateSelectedVisual()
@@ -71,5 +80,11 @@ public class UnitActioSystemUI : MonoBehaviour
         {
             actionButtonUI.UpdateSelectedVisual();
         }
+    }
+
+    private void UpdateActionPoints()
+    {
+        Unit selectedUnit = UnitActionSystem.Instance.GetSelectedUnit();
+        actionPointsText.text = "Action Points: " + selectedUnit.GetActionPoints();
     }
 }
