@@ -25,9 +25,12 @@ public class UnitActioSystemUI : MonoBehaviour
         UnitActionSystem.Instance.OnSelectedUnitChange += UnitActionSystem_OnSelectedUnitChanged;
         UnitActionSystem.Instance.OnSelectedActionChange += UnitActionSystem_OnSelectedActiontChanged;
         UnitActionSystem.Instance.OnActionStarted += UnitActionSystem_OnActionStarted;
+        TurnSystem.Instance.OnTurnChange += TurnSystem_OnTurnChange;
+        Unit.OnAnyActionPointsChanged += Unit_OnAnyActionPointsChanged;
 
         CreateUnitActionButtons();
         UpdateSelectedVisual();
+        UpdateActionPoints();
     }
 
     // Update is called once per frame
@@ -70,6 +73,16 @@ public class UnitActioSystemUI : MonoBehaviour
     }
 
     private void UnitActionSystem_OnActionStarted(object sender, EventArgs e)
+    {
+        UpdateActionPoints();
+    }
+
+    private void TurnSystem_OnTurnChange(object sender, EventArgs e)
+    {
+        UpdateActionPoints();
+    }
+
+    private void Unit_OnAnyActionPointsChanged(object sender, EventArgs e)
     {
         UpdateActionPoints();
     }
