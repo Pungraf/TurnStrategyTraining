@@ -15,6 +15,8 @@ public class Unit : MonoBehaviour
     private BaseAction[] baseActionArray;
     private int actionPoints = ACTION_POINTS_MAX;
 
+    [SerializeField] private bool isEnemy; 
+
     private void Awake()
     {
         moveAction = GetComponent<MoveAction>();
@@ -28,7 +30,7 @@ public class Unit : MonoBehaviour
         gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
         LevelGrid.Instance.AddUnitAtGridPosition(gridPosition, this);
 
-        TurnSystem.Instance.OnTurnChange += TurnSystem_OnTurnChange;
+        TurnSystem.Instance.OnTurnChanged += TurnSystem_OnTurnChange;
     }
 
     // Update is called once per frame
@@ -44,8 +46,12 @@ public class Unit : MonoBehaviour
 
     private void TurnSystem_OnTurnChange(object sender, EventArgs e)
     {
-        actionPoints = ACTION_POINTS_MAX;
-        OnAnyActionPointsChanged?.Invoke(this, EventArgs.Empty);
+        if((isEnemy && !TurnSystem.Instance.IsPlayerTurn())||
+           (!isEnemy && TurnSystem.Instance.IsPlayerTurn()))
+        {
+            actionPoints = ACTION_POINTS_MAX;
+            OnAnyActionPointsChanged?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     public MoveAction GetMoveAction()
@@ -102,5 +108,10 @@ public class Unit : MonoBehaviour
     public int GetActionPoints()
     {
         return actionPoints;
+    }
+
+    public bool IsEnemy()
+    {
+        return isEnemy;
     }
 }
