@@ -44,6 +44,11 @@ public class Unit : MonoBehaviour
         }
     }
 
+    public Vector3 GetWorldPosition()
+    {
+        return transform.position;
+    }
+
     private void TurnSystem_OnTurnChange(object sender, EventArgs e)
     {
         if((isEnemy && !TurnSystem.Instance.IsPlayerTurn())||
@@ -113,5 +118,10 @@ public class Unit : MonoBehaviour
     public bool IsEnemy()
     {
         return isEnemy;
+    }
+
+    public void Damage()
+    {
+        Debug.Log(transform + " damaged!");
     }
 }
