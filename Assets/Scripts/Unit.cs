@@ -6,13 +6,16 @@ using UnityEngine;
 public class Unit : MonoBehaviour
 {
     public static event EventHandler OnAnyActionPointsChanged;
+    public static event EventHandler OnAnyUnitSpawn;
+    public static event EventHandler OnAnyUnitDead;
 
-    private const int ACTION_POINTS_MAX = 3;
+    private const int ACTION_POINTS_MAX = 2;
 
     private GridPosition gridPosition;
     private HealthSystem healthSystem;
     private MoveAction moveAction;
     private SpinAction spinAction;
+    private ShootAction shootAction;
     private BaseAction[] baseActionArray;
     private int actionPoints = ACTION_POINTS_MAX;
 
@@ -24,6 +27,7 @@ public class Unit : MonoBehaviour
 
         moveAction = GetComponent<MoveAction>();
         spinAction = GetComponent<SpinAction>();
+        shootAction = GetComponent<ShootAction>();
         baseActionArray = GetComponents<BaseAction>();
     }
 
@@ -36,6 +40,8 @@ public class Unit : MonoBehaviour
         TurnSystem.Instance.OnTurnChanged += TurnSystem_OnTurnChange;
 
         healthSystem.OnDead += HealthSystem_OnDead;
+
+        OnAnyUnitSpawn?.Invoke(this, EventArgs.Empty);
     }
 
     // Update is called once per frame
@@ -74,6 +80,10 @@ public class Unit : MonoBehaviour
     public SpinAction GetSpinAction()
     {
         return spinAction;
+    }
+    public ShootAction GetSootAction()
+    {
+        return shootAction;
     }
 
     public GridPosition GetGridPosition()
@@ -135,7 +145,12 @@ public class Unit : MonoBehaviour
     private void HealthSystem_OnDead(object sender, EventArgs e)
     {
         LevelGrid.Instance.RemoveUnitAtGridPosition(gridPosition, this);
-
+        OnAnyUnitDead?.Invoke(this, EventArgs.Empty);
         Destroy(gameObject);
+    }
+
+    public float GetHealthNormalized()
+    {
+        return healthSystem.GetHealthNormlized();
     }
 }
