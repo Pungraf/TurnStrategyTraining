@@ -269,6 +269,104 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9de0683c94d97844385122c6acdf6115, type: 3}
+--- !u!1 &77982754
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 77982755}
+  - component: {fileID: 77982757}
+  - component: {fileID: 77982756}
+  m_Layer: 0
+  m_Name: ScreenShake
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &77982755
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77982754}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 24
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &77982756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77982754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53e14f1a534fa5f4c8af997f54c021fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &77982757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77982754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 4
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.1
+    m_ImpulseType: 0
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: 0, y: 0.3, z: 0}
 --- !u!1001 &105079056
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -425,6 +523,7 @@ GameObject:
   m_Component:
   - component: {fileID: 111331245}
   - component: {fileID: 111331244}
+  - component: {fileID: 111331246}
   m_Layer: 0
   m_Name: CinemachineVirtualCamera
   m_TagString: Untagged
@@ -478,7 +577,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 111331243}
-  m_LocalRotation: {x: 0.40455356, y: 0.00000002225333, z: -0.000000009844203, w: 0.9145143}
+  m_LocalRotation: {x: 0.40455356, y: -0.00000002225333, z: 0.000000009844203, w: 0.9145143}
   m_LocalPosition: {x: 0, y: 11, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -487,6 +586,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &111331246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111331243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ApplyAfter: 2
+  m_ChannelMask: 1
+  m_Gain: 1
+  m_Use2DDistance: 0
+  m_UseCameraSpace: 1
+  m_ReactionSettings:
+    m_SecondaryNoise: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+    m_AmplitudeGain: 10
+    m_FrequencyGain: 5
+    m_Duration: 0.5
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &137034314
 GameObject:
   m_ObjectHideFlags: 0
@@ -639,7 +761,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.40455356, y: 0.00000002225333, z: -0.000000009844203, w: 0.9145143}
+  m_LocalRotation: {x: 0.40455356, y: -0.00000002225333, z: 0.000000009844203, w: 0.9145143}
   m_LocalPosition: {x: 0, y: 11, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1491,6 +1613,7 @@ GameObject:
   m_Component:
   - component: {fileID: 704139419}
   - component: {fileID: 704139418}
+  - component: {fileID: 704139420}
   m_Layer: 0
   m_Name: ActionVirtualCamera
   m_TagString: Untagged
@@ -1553,6 +1676,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &704139420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704139417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ApplyAfter: 2
+  m_ChannelMask: 1
+  m_Gain: 1
+  m_Use2DDistance: 0
+  m_UseCameraSpace: 1
+  m_ReactionSettings:
+    m_SecondaryNoise: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+    m_AmplitudeGain: 10
+    m_FrequencyGain: 5
+    m_Duration: 0.5
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1001 &726774691
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3363,6 +3509,50 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7957749e1f0b24c4d8f68dea5bc8e114, type: 3}
+--- !u!1 &1837206464
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1837206466}
+  - component: {fileID: 1837206465}
+  m_Layer: 0
+  m_Name: ScreenShakeActions
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1837206465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837206464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9275932bbf23eaf45ad1857908dcf0c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1837206466
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837206464}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.739509, y: -4.584272, z: 1.5996376}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 25
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1850617152 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2701221812968314698, guid: 7957749e1f0b24c4d8f68dea5bc8e114,
