@@ -9,7 +9,7 @@ public class Unit : MonoBehaviour
     public static event EventHandler OnAnyUnitSpawn;
     public static event EventHandler OnAnyUnitDead;
 
-    private const int ACTION_POINTS_MAX = 2;
+    private const int ACTION_POINTS_MAX = 5;
 
     private GridPosition gridPosition;
     private HealthSystem healthSystem;
