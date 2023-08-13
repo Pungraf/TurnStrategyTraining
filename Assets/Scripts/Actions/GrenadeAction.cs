@@ -60,7 +60,7 @@ public class GrenadeAction : BaseAction
             }
         }
 
-        return validGridPositionList; ;
+        return validGridPositionList;
     }
 
     public override void TakeAction(GridPosition gridPosition, Action onActionComplete)
