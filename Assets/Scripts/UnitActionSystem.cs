@@ -29,6 +29,24 @@ public class UnitActionSystem : MonoBehaviour
             return;
         }
         Instance = this;
+
+        TurnSystem.Instance.OnTurnChanged += TurnSystem_OnTurnChange;
+    }
+
+    private void TurnSystem_OnTurnChange(object sender, EventArgs e)
+    {
+        if(selectedUnit == null)
+        {
+            Unit[] nextUnits = FindObjectsOfType<Unit>();
+            foreach(Unit unit in nextUnits)
+            {
+                if(!unit.IsEnemy())
+                {
+                    SetSelectedUnit(unit);
+                    return;
+                }
+            }
+        }
     }
 
     private void Start()
@@ -38,6 +56,7 @@ public class UnitActionSystem : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(selectedUnit.ToString());
         if(isBusy)
         {
             return;
