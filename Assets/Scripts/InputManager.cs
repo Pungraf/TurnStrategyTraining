@@ -33,6 +33,7 @@ public class InputManager : MonoBehaviour
 #endif
     }
 
+
     public bool IsMouseButtonDownThisFrame()
     {
 #if USE_NEW_INPUT_SYSTEM
