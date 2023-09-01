@@ -8,6 +8,7 @@ public class InteractSphere : MonoBehaviour, IInteractable
     [SerializeField] private Material colorGreen;
     [SerializeField] private Material colorRed;
     [SerializeField] private MeshRenderer meshRenderer;
+    [SerializeField] private Item itemToDrop;
 
     private GridPosition gridPosition;
     private bool isGreen;
@@ -61,6 +62,11 @@ public class InteractSphere : MonoBehaviour, IInteractable
         if (isGreen)
         {
             SetColorRed();
+            if (!InventoryManager.Instance.AddItem(itemToDrop))
+            {
+                Debug.Log("Max inventory");
+            }
+        
         }
         else
         {

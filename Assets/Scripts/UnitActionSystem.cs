@@ -56,7 +56,6 @@ public class UnitActionSystem : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(selectedUnit.ToString());
         if(isBusy)
         {
             return;
