@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : MonoBehaviour, IDataPersistence
 {
     public static InventoryManager Instance { get; private set; }
 
@@ -56,5 +56,42 @@ public class InventoryManager : MonoBehaviour
         InventoryItem inventoryItem = newItemGO.GetComponent<InventoryItem>();
         slot.SetItemToSlot(inventoryItem);
         inventoryItem.InitializeItem(item);
+    }
+
+    public void SpawnNewItem(Item item, InventorySlot slot, int count)
+    {
+        GameObject newItemGO = Instantiate(inventoryItemPrefab, slot.transform);
+        InventoryItem inventoryItem = newItemGO.GetComponent<InventoryItem>();
+        slot.SetItemToSlot(inventoryItem);
+        inventoryItem.Count = count;
+        inventoryItem.InitializeItem(item);
+    }
+
+    public void LoadData(GameData data)
+    {
+        foreach(SerializableEquipmentSlot equipmentSlot in data.inventoryItems)
+        {
+            SpawnNewItem(Resources.Load<Item>("Items/" + equipmentSlot.itemName),
+                         inventorySlots[equipmentSlot.slotID],
+                         equipmentSlot.count);
+        }
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.inventoryItems.Clear();
+        for(int i = 0; i < inventorySlots.Length; i++)
+        {
+            if(inventorySlots[i].GetItemInSlot() != null)
+            {
+                data.inventoryItems.Add(
+                    new SerializableEquipmentSlot
+                    {
+                        slotID = i,
+                        itemName = inventorySlots[i].GetItemInSlot().GetItem().name,
+                        count = inventorySlots[i].GetItemInSlot().Count
+                    });
+            }
+        }
     }
 }

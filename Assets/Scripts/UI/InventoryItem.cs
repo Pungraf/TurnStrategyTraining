@@ -7,9 +7,12 @@ using UnityEngine.UI;
 
 public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
-    public Image image;
     [HideInInspector] public Transform parentAfterDrag;
+    [SerializeField] private string imageName;
     [SerializeField] private TextMeshProUGUI countText;
+
+
+    public Image image;
 
     private Item item;
     private int count = 1;
@@ -41,7 +44,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     public void InitializeItem(Item item)
     {
         this.item = item;
-        image.sprite = item.image;
+        image.sprite = item.GetSprite();
     }
 
 

@@ -16,7 +16,9 @@ public class Unit : MonoBehaviour
     private BaseAction[] baseActionArray;
     private int actionPoints = ACTION_POINTS_MAX;
 
-    [SerializeField] private bool isEnemy; 
+    [SerializeField] private bool isEnemy;
+
+    [SerializeField] private Item itemToDrop;
 
     private void Awake()
     {
@@ -137,6 +139,13 @@ public class Unit : MonoBehaviour
     {
         LevelGrid.Instance.RemoveUnitAtGridPosition(gridPosition, this);
         OnAnyUnitDead?.Invoke(this, EventArgs.Empty);
+        if(isEnemy)
+        {
+            if (!InventoryManager.Instance.AddItem(itemToDrop))
+            {
+                Debug.Log("Max inventory");
+            }
+        }
         Destroy(gameObject);
     }
 

@@ -44,4 +44,9 @@ public class InventorySlot : MonoBehaviour, IDropHandler
     {
         itemInSlot = inventoryItem;
     }
+
+    public InventoryItem GetItemInSlot()
+    {
+        return itemInSlot;
+    }
 }

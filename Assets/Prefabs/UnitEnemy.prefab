@@ -24,6 +24,12 @@ PrefabInstance:
       propertyPath: isEnemy
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4342804834576203953, guid: 326fa4b6f07c1de4793d3ab051008819,
+        type: 3}
+      propertyPath: itemToDrop
+      value: 
+      objectReference: {fileID: 11400000, guid: 696e95a829045e24f9be41cb3ed9b487,
+        type: 2}
     - target: {fileID: 6054442053891077312, guid: 326fa4b6f07c1de4793d3ab051008819,
         type: 3}
       propertyPath: m_Name

@@ -44,8 +44,6 @@ public class UnitManager : MonoBehaviour
     {
         Unit unit = sender as Unit;
 
-        Debug.Log("Spawned: " + unit);
-
         unitList.Add(unit);
 
          if(unit.IsEnemy())

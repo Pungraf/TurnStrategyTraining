@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: MovementDice
   m_EditorClassIdentifier: 
   isStackable: 0
-  image: {fileID: 21300000, guid: 4a59da33ae922924dbd2e6dae5f25353, type: 3}
+  maxStack: 1
+  spriteName: Dark_10

@@ -7,8 +7,7 @@ public class Item : ScriptableObject
 {
     [SerializeField] private bool isStackable;
     [SerializeField] private int maxStack;
-
-    public Sprite image;
+    [SerializeField] private string spriteName;
 
     public bool IsStackable()
     {
@@ -22,5 +21,10 @@ public class Item : ScriptableObject
         {
             maxStack = value;
         }
+    }
+
+    public Sprite GetSprite()
+    {
+        return UIAssets.Instance.GetSprite(spriteName);
     }
 }
