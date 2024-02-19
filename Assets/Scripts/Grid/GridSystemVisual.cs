@@ -25,6 +25,7 @@ public class GridSystemVisual : MonoBehaviour
 
     [SerializeField] private Transform gridSystemVisualSinglePrefab;
     [SerializeField] private List<GridVisualTypeMaterial> gridVisualTypeMaterialList;
+    [SerializeField] private Transform SingleVisualsParent;
 
     private GridSystemVisualSingle[,] gridSystemVisualSingleArray;
     private GridSystemVisualSingle lastSelectedGridSystemVisualSingle;
@@ -49,7 +50,7 @@ public class GridSystemVisual : MonoBehaviour
             for(int z = 0; z<LevelGrid.Instance.GetHeight(); z++)
             {
                 GridPosition gridPosition = new GridPosition(x, z);
-                Transform gridSystemVisualSingleTransform = Instantiate(gridSystemVisualSinglePrefab, LevelGrid.Instance.GetWorldPosition(gridPosition), Quaternion.identity);
+                Transform gridSystemVisualSingleTransform = Instantiate(gridSystemVisualSinglePrefab, LevelGrid.Instance.GetWorldPosition(gridPosition), Quaternion.identity, SingleVisualsParent);
        
                 gridSystemVisualSingleArray[x,z] = gridSystemVisualSingleTransform.GetComponent<GridSystemVisualSingle>();
             }
