@@ -39,8 +39,10 @@ public class DiceSlot : MonoBehaviour
 
     public void InitializeSlot(Dice dice)
     {
+        Dice newDiceInstance = Instantiate(dice);
         Tray = Instantiate(trayPrefab, transform);
-        diceObject = Instantiate(dice.GetDiceObject(), transform);
+        diceObject = newDiceInstance.GetDiceObject();
+        diceObject.transform.SetParent(transform);
         diceTransform = diceObject.transform;
         diceTransform.position = new Vector3(Tray.transform.position.x + 5f, Tray.transform.position.y, Tray.transform.position.z);
     }

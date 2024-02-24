@@ -336,7 +336,7 @@ MonoBehaviour:
   trayPrefab: {fileID: 601149902841441698, guid: d383aa0fa1dab934d875e4c238c08b14,
     type: 3}
   image: {fileID: 5371927755192248957}
-  shakeForce: 10000
+  shakeForce: 1000
 --- !u!114 &8956083325292062066
 MonoBehaviour:
   m_ObjectHideFlags: 0
