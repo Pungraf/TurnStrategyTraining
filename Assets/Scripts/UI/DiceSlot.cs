@@ -14,7 +14,7 @@ public class DiceSlot : MonoBehaviour
     private Transform cameraTransform;
     private RenderTexture renderTexture;
     private GameObject Tray;
-    private GameObject diceObject;
+    private DiceObject diceObject;
 
     private float cameraHighOffset = 2f;
 
@@ -41,8 +41,9 @@ public class DiceSlot : MonoBehaviour
     {
         Dice newDiceInstance = Instantiate(dice);
         Tray = Instantiate(trayPrefab, transform);
-        diceObject = newDiceInstance.GetDiceObject();
+        diceObject = newDiceInstance.SummonDice();
         diceObject.transform.SetParent(transform);
+        diceObject.DiceSlot = this;
         diceTransform = diceObject.transform;
         diceTransform.position = new Vector3(Tray.transform.position.x + 5f, Tray.transform.position.y, Tray.transform.position.z);
     }

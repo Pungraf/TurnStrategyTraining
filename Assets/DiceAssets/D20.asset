@@ -15,46 +15,26 @@ MonoBehaviour:
   isStackable: 0
   maxStack: 1
   spriteName: Fire_7
-  diceGO: {fileID: 597399186880265813, guid: 2803fd16df9ce724fab4b47d0fb85631, type: 3}
+  diceObjectPrefab: {fileID: 1707912040973649731, guid: 2803fd16df9ce724fab4b47d0fb85631,
+    type: 3}
   namesList:
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  FacesObjects:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - D20_F01
+  - D20_F02
+  - D20_F03
+  - D20_F04
+  - D20_F05
+  - D20_F06
+  - D20_F07
+  - D20_F08
+  - D20_F09
+  - D20_F10
+  - D20_F11
+  - D20_F12
+  - D20_F13
+  - D20_F14
+  - D20_F15
+  - D20_F16
+  - D20_F17
+  - D20_F18
+  - D20_F19
+  - D20_F20

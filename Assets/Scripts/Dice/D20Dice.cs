@@ -5,9 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Scriptable object/Dice/D20")]
 public class D20Dice : Dice
 {
-    protected override void GenerateFacesPlaces()
+    protected override List<FaceGeometry> GenerateFacesPlaces()
     {
         base.GenerateFacesPlaces();
+        faces.Clear();
         faces.Add(new FaceGeometry(0.0000000f, 0.0000000f, 0.0000000f, 0.000000f, 0.000000f, 0.000000f, 1.000000f)); //1
         faces.Add(new FaceGeometry(0.0000000f, 0.0000000f, 0.0000000f, 0.809045f, 0.467047f, -0.356810f, 0.000000f)); //2
         faces.Add(new FaceGeometry(0.0000000f, 0.0000000f, 0.0000000f, 0.000043f, 0.577331f, 0.755795f, 0.308971f)); //3
@@ -28,5 +29,7 @@ public class D20Dice : Dice
         faces.Add(new FaceGeometry(0.0000000f, 0.0000000f, 0.0000000f, -0.500018f, 0.645503f, -0.288656f, -0.499989f)); //18
         faces.Add(new FaceGeometry(0.0000000f, 0.0000000f, 0.0000000f, 0.308997f, -0.178422f, 0.467086f, -0.809025f)); //19
         faces.Add(new FaceGeometry(0.0000000f, 0.0000000f, 0.0000000f, 0.499997f, 0.866030f, 0.000023f, -0.000013f)); //20
+
+        return faces;
     }
 }
