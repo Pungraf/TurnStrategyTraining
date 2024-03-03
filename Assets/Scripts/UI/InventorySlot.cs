@@ -5,9 +5,9 @@ using UnityEngine.EventSystems;
 
 public class InventorySlot : MonoBehaviour, IDropHandler
 {
-    private InventoryItem itemInSlot;
+    public InventoryItem itemInSlot;
 
-    public void OnDrop(PointerEventData eventData)
+    public virtual void OnDrop(PointerEventData eventData)
     {
         if (transform.childCount == 0)
         {

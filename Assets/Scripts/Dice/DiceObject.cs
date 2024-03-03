@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DiceObject : MonoBehaviour
 {
+    public static event EventHandler OnAnyDiceRollAction;
+
+    private int currentRolledValue;
     private List<Face> diceFaces = new List<Face>();
     private List<GameObject> facesCenters = new List<GameObject>();
     private List<FaceGeometry> diceGeometries;
@@ -29,6 +33,12 @@ public class DiceObject : MonoBehaviour
         {
             ChoosedFace();
         }
+    }
+
+    public int CurrentRolledValue
+    {
+        get { return currentRolledValue; }
+        set { currentRolledValue = value; }
     }
 
     public List<Face> DiceFaces
@@ -65,8 +75,9 @@ public class DiceObject : MonoBehaviour
                 currentHighest = faceCenter.transform.parent.GetComponent<Face>();
             }
         }
-        Debug.Log("Choosed face : " + currentHighest.gameObject.name);
+        currentRolledValue = currentHighest.faceValue;
         faceIsChoosed = true;
+        OnAnyDiceRollAction?.Invoke(this, EventArgs.Empty);
     }
 
     public void GenerateFaces()

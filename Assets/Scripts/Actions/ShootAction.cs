@@ -104,7 +104,7 @@ public class ShootAction : BaseAction
             shootingUnit = unit
         });
 
-        targetUnit.Damage(40);
+        targetUnit.Damage(DiceManager.Instance.CurrentRolledTotal);
     }
 
     public override string GetActionName()

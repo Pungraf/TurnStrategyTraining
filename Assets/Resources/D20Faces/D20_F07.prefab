@@ -133,6 +133,7 @@ MonoBehaviour:
   FaceIndex: 0
   FaceName: D20_F07
   type: 
+  faceValue: 7
 --- !u!1 &1165442753517366001 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7948237253069561386, guid: bc041611612df7e4184dbdd893c75807,

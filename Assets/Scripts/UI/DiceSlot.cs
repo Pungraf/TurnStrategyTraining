@@ -42,6 +42,7 @@ public class DiceSlot : MonoBehaviour
         Dice newDiceInstance = Instantiate(dice);
         Tray = Instantiate(trayPrefab, transform);
         diceObject = newDiceInstance.SummonDice();
+        DiceManager.Instance.DiceObjects.Add(diceObject);
         diceObject.transform.SetParent(transform);
         diceObject.DiceSlot = this;
         diceTransform = diceObject.transform;

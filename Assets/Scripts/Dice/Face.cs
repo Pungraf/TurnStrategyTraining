@@ -10,6 +10,8 @@ public class Face : MonoBehaviour
     public string FaceName;
     public string type;
 
+    public int faceValue;
+
     public GameObject FaceCenter
     {
         get { return faceCenter; }

@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61e40747d36a9464cb2cf5790e989725, type: 3}
+  m_Name: D20_common
+  m_EditorClassIdentifier: 
+  isStackable: 0
+  maxStack: 1
+  spriteName: Fire_7
+  diceObjectPrefab: {fileID: 1707912040973649731, guid: 2803fd16df9ce724fab4b47d0fb85631,
+    type: 3}
+  namesList:
+  - D20_F01
+  - D20_F02
+  - D20_F03
+  - D20_F04
+  - D20_F05
+  - D20_F06
+  - D20_F07
+  - D20_F08
+  - D20_F09
+  - D20_F10
+  - D20_F11
+  - D20_F12
+  - D20_F13
+  - D20_F14
+  - D20_F15
+  - D20_F16
+  - D20_F17
+  - D20_F18
+  - D20_F19
+  - D20_F20

@@ -24,6 +24,11 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        transform.parent.GetComponent<InventorySlot>().SetItemToSlot(null);
+        if (transform.parent.GetComponent<WeaponSlot>() != null)
+        {
+            DiceManager.Instance.RefreshCurrentWeaponDice();
+        }
         parentAfterDrag= transform.parent;
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
@@ -39,6 +44,12 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     {
         transform.SetParent(parentAfterDrag);
         image.raycastTarget = true;
+    }
+
+    public Item Item
+    {
+        get { return item; }
+        set { item = value; }
     }
 
     public void InitializeItem(Item item)
