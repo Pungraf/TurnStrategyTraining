@@ -8,6 +8,7 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
 
     [SerializeField] private GameObject InventoryGO;
     [SerializeField] private InventorySlot[] inventorySlots;
+    [SerializeField] private InventorySlot[] equipmentSlots;
     [SerializeField] private GameObject inventoryItemPrefab;
 
     private void Awake()
@@ -69,10 +70,17 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        foreach(SerializableEquipmentSlot equipmentSlot in data.inventoryItems)
+        foreach (SerializableEquipmentSlot inventorySlot in data.inventoryItems)
+        {
+            SpawnNewItem(Resources.Load<Item>("Items/" + inventorySlot.itemName),
+                         inventorySlots[inventorySlot.slotID],
+                         inventorySlot.count);
+        }
+
+        foreach (SerializableEquipmentSlot equipmentSlot in data.equipmentSlots)
         {
             SpawnNewItem(Resources.Load<Item>("Items/" + equipmentSlot.itemName),
-                         inventorySlots[equipmentSlot.slotID],
+                         equipmentSlots[equipmentSlot.slotID],
                          equipmentSlot.count);
         }
     }
@@ -90,6 +98,21 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
                         slotID = i,
                         itemName = inventorySlots[i].GetItemInSlot().GetItem().name,
                         count = inventorySlots[i].GetItemInSlot().Count
+                    });
+            }
+        }
+
+        data.equipmentSlots.Clear();
+        for (int i = 0; i < equipmentSlots.Length; i++)
+        {
+            if (equipmentSlots[i].GetItemInSlot() != null)
+            {
+                data.equipmentSlots.Add(
+                    new SerializableEquipmentSlot
+                    {
+                        slotID = i,
+                        itemName = equipmentSlots[i].GetItemInSlot().GetItem().name,
+                        count = equipmentSlots[i].GetItemInSlot().Count
                     });
             }
         }

@@ -7,7 +7,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler
 {
     public InventoryItem itemInSlot;
 
-    public virtual void OnDrop(PointerEventData eventData)
+    public void OnDrop(PointerEventData eventData)
     {
         if (transform.childCount == 0)
         {
@@ -16,7 +16,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler
             if (inventoryItem != null)
             {
                 inventoryItem.parentAfterDrag = transform;
-                itemInSlot = inventoryItem;
+                SetItemToSlot(inventoryItem);
             }
         }
         else if(transform.childCount == 1 && (itemInSlot.Count < itemInSlot.GetItem().MaxStack))
@@ -40,7 +40,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler
         }
     }
 
-    public void SetItemToSlot(InventoryItem inventoryItem)
+    public virtual void SetItemToSlot(InventoryItem inventoryItem)
     {
         itemInSlot = inventoryItem;
     }

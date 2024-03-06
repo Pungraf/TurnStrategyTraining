@@ -8,10 +8,10 @@ public class WeaponSlot : InventorySlot
 {
     public static event EventHandler OnAnyWeaponSlotedEvent;
 
-    public override void OnDrop(PointerEventData eventData)
-    {
-        base.OnDrop(eventData);
 
+    public override void SetItemToSlot(InventoryItem inventoryItem)
+    {
+        base.SetItemToSlot(inventoryItem);
         OnAnyWeaponSlotedEvent?.Invoke(this, EventArgs.Empty);
     }
 }
