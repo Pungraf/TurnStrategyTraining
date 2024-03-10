@@ -5,13 +5,22 @@ using UnityEngine;
 
 public class DiceManager : MonoBehaviour
 {
+    public enum SelectedDice
+    {
+        RangedWeapon,
+        Grenade,
+        None,
+    }
 
     public static DiceManager Instance { get; private set; }
+
+    public event EventHandler DiceRollFinished;
 
     [SerializeField] private Transform dicePanelTransform;
     [SerializeField] private GameObject diceSlotPrefab;
     [SerializeField] private List<Dice> dices;
     [SerializeField] Transform weaponSlots;
+    [SerializeField] Transform grenadeSlots;
 
     [SerializeField] private int currentRolledTotal;
 
@@ -32,7 +41,7 @@ public class DiceManager : MonoBehaviour
     {
         DiceObject.OnAnyDiceRollAction += DiceObject_OnAnyDiceRoll;
         WeaponSlot.OnAnyWeaponSlotedEvent += WeaponSlot_onAnyWeaponSloted;
-        RefreshCurrentWeaponDice();
+        RefreshCurrentWeaponDice(SelectedDice.RangedWeapon);
         SpawnDice(dices);
     }
 
@@ -47,13 +56,33 @@ public class DiceManager : MonoBehaviour
 
     private void WeaponSlot_onAnyWeaponSloted(object sender, EventArgs e)
     {
-        RefreshCurrentWeaponDice();
+        RefreshCurrentWeaponDice(SelectedDice.RangedWeapon);
     }
 
-    public void RefreshCurrentWeaponDice()
+    public void ToggleDicePanel(bool state)
+    {
+        dicePanelTransform.parent.gameObject.SetActive(state);
+    }
+
+    public void RefreshCurrentWeaponDice(SelectedDice selectedDice)
     {
         dices.Clear();
-        WeaponSlot[] weapons = weaponSlots.GetComponentsInChildren<WeaponSlot>();
+        WeaponSlot[] weapons = new WeaponSlot[dices.Count];
+        switch (selectedDice)
+        {
+            case SelectedDice.RangedWeapon:
+                {
+                    weapons = weaponSlots.GetComponentsInChildren<WeaponSlot>();
+                    break;
+                }
+            case SelectedDice.Grenade:
+                {
+                    weapons = grenadeSlots.GetComponentsInChildren<WeaponSlot>();
+                    break;
+                }
+            default: break;
+
+        }
         foreach (WeaponSlot weapon in weapons)
         {
             if (weapon.itemInSlot != null)
@@ -103,5 +132,16 @@ public class DiceManager : MonoBehaviour
             DiceSlot diceSlot = newSlot.GetComponent<DiceSlot>();
             diceSlot.InitializeSlot(d);
         }
+    }
+
+    public void DiceRollRequest()
+    {
+        ToggleDicePanel(true);
+    }
+
+    public void DiceRollDone()
+    {
+        ToggleDicePanel(false);
+        DiceRollFinished?.Invoke(this, EventArgs.Empty);
     }
 }

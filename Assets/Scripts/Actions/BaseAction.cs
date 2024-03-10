@@ -8,6 +8,8 @@ public abstract class BaseAction : MonoBehaviour
     public static event EventHandler OnAnyActionStarted;
     public static event EventHandler OnAnyActionCompleted;
 
+    public DiceManager.SelectedDice diceType;
+
     protected Unit unit;
     protected bool isActive;
     protected Action onActionComplete;

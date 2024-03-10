@@ -582,6 +582,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 0
+  itemToDrop: {fileID: 0}
 --- !u!65 &2045939982268174515
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -615,6 +616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf9e5cd31b372d94bbe6708f0213bcd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  diceType: 2
   maxMoveDistance: 4
 --- !u!114 &-2783162902640141865
 MonoBehaviour:
@@ -628,6 +630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4d92ae0ca1d4ba4bbfa5749a7256237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  diceType: 2
 --- !u!114 &7942388230999783141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -640,6 +643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ab2f041c0369748abdff4a04eb2b27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  diceType: 0
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 256
@@ -655,6 +659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abc2cc3c2de674d46a803fdb3fde0479, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  diceType: 1
   grenadeProjectilePrefab: {fileID: 3631435174181077924, guid: c224603bf149d8e4b8874b282c262aed,
     type: 3}
 --- !u!114 &-3826338347425125944
@@ -669,6 +674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18504a19e673a63458310ad7f81b33cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  diceType: 0
 --- !u!114 &-8570037012088685552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -681,6 +687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ccce2f2012e4ce499bd96f5b1bf48e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  diceType: 2
 --- !u!114 &-394084942740857594
 MonoBehaviour:
   m_ObjectHideFlags: 0

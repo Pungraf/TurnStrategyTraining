@@ -155,6 +155,21 @@ public class UnitActionSystem : MonoBehaviour
         selectedAction = baseAction;
 
         OnSelectedActionChange?.Invoke(this, EventArgs.Empty);
+
+        switch (baseAction.diceType)
+        {
+            case DiceManager.SelectedDice.RangedWeapon:
+                {
+                    DiceManager.Instance.RefreshCurrentWeaponDice(DiceManager.SelectedDice.RangedWeapon);
+                    break;
+                }
+            case DiceManager.SelectedDice.Grenade:
+                {
+                    DiceManager.Instance.RefreshCurrentWeaponDice(DiceManager.SelectedDice.Grenade);
+                    break;
+                }
+            default: break;
+        }
     }
 
     public Unit GetSelectedUnit()

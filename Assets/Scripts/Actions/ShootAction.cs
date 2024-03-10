@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootAction : BaseAction
+public class ShootAction : BaseAction, IDiceRequest
 {
     public static event EventHandler<OnShootEventArgs> OnAnyShoot;
     public event EventHandler<OnShootEventArgs> OnShoot;
@@ -17,6 +17,7 @@ public class ShootAction : BaseAction
     private enum State
     {
         Aiming,
+        DiceRolling,
         Shooting,
         Cooloff,
     }
@@ -24,15 +25,16 @@ public class ShootAction : BaseAction
     [SerializeField] private LayerMask obstacleLayerMask;
 
     private State state;
-    private int maxShootDistance = 6;
     private float stateTimer;
+    private bool diceRolled = true;
+    private int maxShootDistance = 6;
     private Unit targetUnit;
     private bool canShootBullet;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        DiceManager.Instance.DiceRollFinished += DiceManager_OnDiceRollFinished;
     }
 
     // Update is called once per frame
@@ -53,6 +55,13 @@ public class ShootAction : BaseAction
 
                 transform.forward = Vector3.Lerp(transform.forward, aimDir, Time.deltaTime * rotateSpeed);
                 break;
+            case State.DiceRolling:
+                if(diceRolled == true)
+                {
+                    DiceManager.Instance.DiceRollRequest();
+                    diceRolled = false;
+                }
+                break;
             case State.Shooting:
                 if(canShootBullet)
                 {
@@ -64,10 +73,21 @@ public class ShootAction : BaseAction
                 break;
         }
 
-        if (stateTimer < 0f)
+        if (stateTimer < 0f && diceRolled)
         {
             NextState();
         }
+    }
+
+    private void DiceManager_OnDiceRollFinished(object sender, EventArgs e)
+    {
+        if (!isActive)
+        {
+            return;
+        }
+
+        diceRolled = true;
+        NextState();
     }
 
     private void NextState()
@@ -75,8 +95,13 @@ public class ShootAction : BaseAction
         switch (state)
         {
             case State.Aiming:
+                state = State.DiceRolling;
+                float DiceRollingTimer = 0.1f;
+                stateTimer = DiceRollingTimer;
+                break;
+            case State.DiceRolling:
                 state = State.Shooting;
-                float ShootingStateTime = 0.1f;
+                float ShootingStateTime = 0f;
                 stateTimer = ShootingStateTime;
                 break;
             case State.Shooting:

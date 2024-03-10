@@ -14,11 +14,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7150328342954919463, guid: 8306caf920c7d7645ba3bd0795524b16,
         type: 3}
+    - target: {fileID: -3826338347425125944, guid: 326fa4b6f07c1de4793d3ab051008819,
+        type: 3}
+      propertyPath: diceType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 149623431698877903, guid: 326fa4b6f07c1de4793d3ab051008819,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7d22fc6b9a431b043a917fb89a80bcfc, type: 2}
+    - target: {fileID: 589580461968722355, guid: 326fa4b6f07c1de4793d3ab051008819,
+        type: 3}
+      propertyPath: diceType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4342804834576203953, guid: 326fa4b6f07c1de4793d3ab051008819,
         type: 3}
       propertyPath: isEnemy
@@ -89,6 +99,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7942388230999783141, guid: 326fa4b6f07c1de4793d3ab051008819,
+        type: 3}
+      propertyPath: diceType
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

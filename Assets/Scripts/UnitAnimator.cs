@@ -36,6 +36,7 @@ public class UnitAnimator : MonoBehaviour
 
     private void swordAction_OnSwordActionStarted(object sender, EventArgs e)
     {
+        Debug.Log("Started");
         EquipSword();
         animator.SetTrigger("SwordSlash");
     }
