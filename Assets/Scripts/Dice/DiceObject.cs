@@ -7,6 +7,8 @@ public class DiceObject : MonoBehaviour
 {
     public static event EventHandler OnAnyDiceRollAction;
 
+    public bool isActive = false;
+
     private int currentRolledValue;
     private List<Face> diceFaces = new List<Face>();
     private List<GameObject> facesCenters = new List<GameObject>();
@@ -24,12 +26,12 @@ public class DiceObject : MonoBehaviour
 
     private void Update()
     {
-        if(rb.velocity != Vector3.zero && faceIsChoosed)
+        if(IsRolling() && faceIsChoosed)
         {
             faceIsChoosed = false;
         }
 
-        if(rb.velocity == Vector3.zero && !faceIsChoosed)
+        if(!IsRolling() && !faceIsChoosed)
         {
             ChoosedFace();
         }
@@ -63,6 +65,15 @@ public class DiceObject : MonoBehaviour
     {
         get { return diceSlot; }
         set { diceSlot = value; }
+    }
+
+    public bool IsRolling()
+    {
+        if(rb.velocity == Vector3.zero)
+        {
+            return false;
+        }
+        return true;
     }
 
     private void ChoosedFace()

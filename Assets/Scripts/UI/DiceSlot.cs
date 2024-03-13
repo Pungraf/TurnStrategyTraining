@@ -11,6 +11,8 @@ public class DiceSlot : MonoBehaviour
     [SerializeField] private RawImage image;
     [SerializeField] private float shakeForce;
 
+    public Image backGround;
+
     private Transform cameraTransform;
     private RenderTexture renderTexture;
     private GameObject Tray;
@@ -46,11 +48,30 @@ public class DiceSlot : MonoBehaviour
         diceObject.transform.SetParent(transform);
         diceObject.DiceSlot = this;
         diceTransform = diceObject.transform;
-        diceTransform.position = new Vector3(Tray.transform.position.x + 5f, Tray.transform.position.y, Tray.transform.position.z);
+        diceTransform.position = new Vector3(Tray.transform.position.x + 5f, Tray.transform.position.y - 6.5f, Tray.transform.position.z);
     }
 
     public void ShakeDice()
     {
-        diceObject.GetComponent<Rigidbody>().AddRelativeForce(Random.onUnitSphere * shakeForce);
+        if(diceObject.isActive == true)
+        {
+            if (DiceManager.Instance.ChangeRerollValue(-1))
+            {
+                diceObject.GetComponent<Rigidbody>().AddRelativeForce(Random.onUnitSphere * shakeForce);
+                diceObject.isActive = true;
+                DiceManager.Instance.ExecuteRollButtonEnabled(false);
+            }
+            else
+            {
+                Debug.Log("No more rerolls available.");
+            }
+        }
+        else
+        {
+            diceObject.GetComponent<Rigidbody>().AddRelativeForce(Random.onUnitSphere * shakeForce);
+            diceObject.isActive = true;
+            DiceManager.Instance.ExecuteRollButtonEnabled(false);
+        }
+        
     }
 }

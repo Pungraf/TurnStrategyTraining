@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DiceManager : MonoBehaviour
 {
@@ -19,12 +21,20 @@ public class DiceManager : MonoBehaviour
     [SerializeField] private Transform dicePanelTransform;
     [SerializeField] private GameObject diceSlotPrefab;
     [SerializeField] private List<Dice> dices;
-    [SerializeField] Transform weaponSlots;
-    [SerializeField] Transform grenadeSlots;
+    [SerializeField] private Transform weaponSlots;
+    [SerializeField] private Transform grenadeSlots;
+    [SerializeField] private Button executeRollButton;
+    [SerializeField] private Transform availableRerollsTransform;
 
     [SerializeField] private int currentRolledTotal;
+    [SerializeField] private int maxRerolls;
+    [SerializeField] private int availableRerolls;
+
+    private TextMeshProUGUI availableRerollsText;
 
     [SerializeField] private List<DiceObject> diceObjects;
+
+    public bool allDiceRolled = false;
 
     private void Awake()
     {
@@ -41,17 +51,26 @@ public class DiceManager : MonoBehaviour
     {
         DiceObject.OnAnyDiceRollAction += DiceObject_OnAnyDiceRoll;
         WeaponSlot.OnAnyWeaponSlotedEvent += WeaponSlot_onAnyWeaponSloted;
+        availableRerollsText = availableRerollsTransform.GetComponent<TextMeshProUGUI>();
         RefreshCurrentWeaponDice(SelectedDice.RangedWeapon);
         SpawnDice(dices);
+        ExecuteRollButtonEnabled(false);
     }
+
 
     private void DiceObject_OnAnyDiceRoll(object sender, EventArgs e)
     {
+        allDiceRolled = true;
         currentRolledTotal = 0;
         foreach(DiceObject diceObject in diceObjects)
         {
             currentRolledTotal += diceObject.CurrentRolledValue;
+            if(!diceObject.isActive || diceObject.IsRolling())
+            {
+                allDiceRolled = false;
+            }
         }
+        ExecuteRollButtonEnabled(allDiceRolled);
     }
 
     private void WeaponSlot_onAnyWeaponSloted(object sender, EventArgs e)
@@ -94,10 +113,18 @@ public class DiceManager : MonoBehaviour
         SpawnDice(dices);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ExecuteRollButtonEnabled(bool enabled)
     {
 
+        executeRollButton.interactable = enabled;
+    }
+
+    private void RefreshAllDice()
+    {
+        foreach (DiceObject diceObject in diceObjects)
+        {
+            diceObject.isActive = false;
+        }
     }
 
     public List<Dice> Dices
@@ -134,8 +161,34 @@ public class DiceManager : MonoBehaviour
         }
     }
 
+    private void ResetRerolls()
+    {
+        availableRerolls = maxRerolls;
+        RefreshRerollsText();
+    }
+
+    public bool ChangeRerollValue(int amount)
+    {
+        availableRerolls += amount;
+        if(availableRerolls < 0)
+        {
+            availableRerolls = 0;
+            RefreshRerollsText();
+            return false;
+        }
+        RefreshRerollsText();
+        return true;
+    }
+
+    private void RefreshRerollsText()
+    {
+        availableRerollsText.text = availableRerolls.ToString();
+    }
+
     public void DiceRollRequest()
     {
+        RefreshAllDice();
+        ResetRerolls();
         ToggleDicePanel(true);
     }
 
