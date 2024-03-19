@@ -21,6 +21,7 @@ public class DiceManager : MonoBehaviour
     [SerializeField] private Transform dicePanelTransform;
     [SerializeField] private GameObject diceSlotPrefab;
     [SerializeField] private List<Dice> dices;
+    [SerializeField] private List<DiceSlot> diceSlots;
     [SerializeField] private Transform weaponSlots;
     [SerializeField] private Transform grenadeSlots;
     [SerializeField] private Button executeRollButton;
@@ -65,9 +66,13 @@ public class DiceManager : MonoBehaviour
         foreach(DiceObject diceObject in diceObjects)
         {
             currentRolledTotal += diceObject.CurrentRolledValue;
-            if(!diceObject.isActive || diceObject.IsRolling())
+            if(!diceObject.IsActive || diceObject.IsRolling())
             {
                 allDiceRolled = false;
+            }
+            else
+            {
+                diceObject.DiceSlot.DiceBusy = false;
             }
         }
         ExecuteRollButtonEnabled(allDiceRolled);
@@ -119,11 +124,15 @@ public class DiceManager : MonoBehaviour
         executeRollButton.interactable = enabled;
     }
 
+    public void SetDiceBusy()
+    { 
+    }
+
     private void RefreshAllDice()
     {
         foreach (DiceObject diceObject in diceObjects)
         {
-            diceObject.isActive = false;
+            diceObject.IsActive = false;
         }
     }
 
@@ -145,6 +154,12 @@ public class DiceManager : MonoBehaviour
         set { diceObjects = value; }
     }
 
+    public int AvailableRerolls
+    {
+        get { return availableRerolls;}
+    }
+
+
     public void SpawnDice(List<Dice> dice)
     {
         foreach (Transform child in dicePanelTransform)
@@ -153,10 +168,12 @@ public class DiceManager : MonoBehaviour
         }
 
         diceObjects = new List<DiceObject>();
+        diceSlots.Clear();
         foreach(Dice d in dice)
         {
             GameObject newSlot = Instantiate(diceSlotPrefab, dicePanelTransform);
             DiceSlot diceSlot = newSlot.GetComponent<DiceSlot>();
+            diceSlots.Add(diceSlot);
             diceSlot.InitializeSlot(d);
         }
     }

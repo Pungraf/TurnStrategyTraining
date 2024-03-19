@@ -10,8 +10,10 @@ public class DiceSlot : MonoBehaviour
     [SerializeField] private GameObject trayPrefab;
     [SerializeField] private RawImage image;
     [SerializeField] private float shakeForce;
+    [SerializeField] private Button slotButton;
 
     public Image backGround;
+    private bool diceBusy;
 
     private Transform cameraTransform;
     private RenderTexture renderTexture;
@@ -39,6 +41,34 @@ public class DiceSlot : MonoBehaviour
                                                diceTransform.position.z);
     }
 
+    public bool DiceBusy
+    {
+        get { return diceBusy; }
+        set 
+        {
+            diceBusy = value; 
+            if(value == true)
+            {
+                backGround.color = Color.black;
+                slotButton.interactable = false;
+            }
+            else
+            {
+                if(DiceManager.Instance.AvailableRerolls > 0)
+                {
+                    backGround.color = Color.yellow;
+                    slotButton.interactable = true;
+                }
+                else
+                {
+                    backGround.color = Color.red;
+                    slotButton.interactable = true;
+                }
+            }
+        }
+    }
+
+
     public void InitializeSlot(Dice dice)
     {
         Dice newDiceInstance = Instantiate(dice);
@@ -48,18 +78,20 @@ public class DiceSlot : MonoBehaviour
         diceObject.transform.SetParent(transform);
         diceObject.DiceSlot = this;
         diceTransform = diceObject.transform;
-        diceTransform.position = new Vector3(Tray.transform.position.x + 5f, Tray.transform.position.y - 6.5f, Tray.transform.position.z);
+        diceTransform.position = new Vector3(Tray.transform.position.x + 7.5f, Tray.transform.position.y - 4f, Tray.transform.position.z);
     }
 
     public void ShakeDice()
     {
-        if(diceObject.isActive == true)
+        if(diceObject.IsActive == true)
         {
             if (DiceManager.Instance.ChangeRerollValue(-1))
             {
                 diceObject.GetComponent<Rigidbody>().AddRelativeForce(Random.onUnitSphere * shakeForce);
-                diceObject.isActive = true;
+                diceObject.IsActive = true;
                 DiceManager.Instance.ExecuteRollButtonEnabled(false);
+                DiceBusy = true;
+
             }
             else
             {
@@ -69,9 +101,10 @@ public class DiceSlot : MonoBehaviour
         else
         {
             diceObject.GetComponent<Rigidbody>().AddRelativeForce(Random.onUnitSphere * shakeForce);
-            diceObject.isActive = true;
+            diceObject.IsActive = true;
             DiceManager.Instance.ExecuteRollButtonEnabled(false);
+            DiceBusy = true;
         }
-        
+
     }
 }

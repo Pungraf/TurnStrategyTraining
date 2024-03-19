@@ -7,8 +7,7 @@ public class DiceObject : MonoBehaviour
 {
     public static event EventHandler OnAnyDiceRollAction;
 
-    public bool isActive = false;
-
+    private bool isActive = false;
     private int currentRolledValue;
     private List<Face> diceFaces = new List<Face>();
     private List<GameObject> facesCenters = new List<GameObject>();
@@ -16,6 +15,7 @@ public class DiceObject : MonoBehaviour
     private List<string> namesList;
     private DiceSlot diceSlot;
     private Rigidbody rb;
+    private float pokeStuckedDiceForce = 100;
 
     private bool faceIsChoosed = false;
 
@@ -34,6 +34,19 @@ public class DiceObject : MonoBehaviour
         if(!IsRolling() && !faceIsChoosed)
         {
             ChoosedFace();
+        }
+    }
+
+    public bool IsActive
+    {
+        get { return isActive; }
+        set
+        { 
+            isActive = value; 
+            if(value == false)
+            {
+                DiceSlot.backGround.color = Color.white;
+            }
         }
     }
 
@@ -79,12 +92,18 @@ public class DiceObject : MonoBehaviour
     private void ChoosedFace()
     {
         Face currentHighest = null;
-        foreach (GameObject faceCenter  in facesCenters)
+        foreach (GameObject faceCenter in facesCenters)
         {
             if ((faceCenter.transform.position - this.gameObject.transform.position).normalized.y == Vector3.up.y)
             {
                 currentHighest = faceCenter.transform.parent.GetComponent<Face>();
             }
+        }
+        if(currentHighest == null)
+        {
+            Debug.Log("Null Face");
+            rb.AddRelativeForce(UnityEngine.Random.onUnitSphere * pokeStuckedDiceForce);
+            return;
         }
         currentRolledValue = currentHighest.faceValue;
         faceIsChoosed = true;
